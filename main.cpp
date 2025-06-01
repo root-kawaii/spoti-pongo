@@ -90,9 +90,19 @@ int main() {
 
 void extractUri(const nlohmann::json& result) {
     try {
-        std::string uri = result["tracks"]["items"][0]["uri"];
-        std::cout << "Track URI: " << uri << std::endl;
+        const auto& items = result.at("tracks").at("items");
+
+        std::ostringstream buffer;  // Buffering output in memory
+
+        int count = std::min(15, static_cast<int>(items.size()));
+        for (int i = 0; i < count; ++i) {
+            const auto& track = items[i];
+            std::string name = track.value("name", "Unknown");
+            buffer << i + 1 << ". " << name << '\n';
+        }
+
+        std::cout << buffer.str();  // Single flush to terminal
     } catch (const std::exception& e) {
-        std::cerr << "Failed to extract URI: " << e.what() << std::endl;
+        std::cerr << "Failed to extract track names: " << e.what() << std::endl;
     }
 }

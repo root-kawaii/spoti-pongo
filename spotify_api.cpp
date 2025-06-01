@@ -32,7 +32,7 @@ bool SpotifyAPI::authenticate() {
 std::optional<nlohmann::json> SpotifyAPI::searchTrack(const std::string& query) {
     auto response = cpr::Get(cpr::Url{"https://api.spotify.com/v1/search"},
         cpr::Header{{"Authorization", "Bearer " + accessToken}},
-        cpr::Parameters{{"q", query}, {"type", "track"}, {"limit", "1"}});
+        cpr::Parameters{{"q", query}, {"type", "track"}, {"limit", "20"}});
 
     if (response.status_code == 200) {
         return nlohmann::json::parse(response.text);
