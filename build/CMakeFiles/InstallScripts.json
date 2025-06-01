@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/monolith/Desktop/spotify-cli/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
