@@ -37,7 +37,7 @@ std::optional<nlohmann::json> SpotifyAPI::searchTrack(const std::string& query) 
     if (response.status_code == 200) {
         return nlohmann::json::parse(response.text);
     } else {
-        std::cerr << "Search failed: " << response.status_code << "\n";
+        std::cerr << "Error (" << response.status_code << "): " << response.text << std::endl;
         return std::nullopt;
     }
 }
@@ -59,7 +59,7 @@ void SpotifyAPI::playSpotifyTrack(const std::string& track_uri) {
     );
 
     if (r.status_code == 204) {
-        std::cout << "Track is now playing.\n";
+        // std::cout << "Track is now playing.\n";
     } else {
         std::cerr << "Error (" << r.status_code << "): " << r.text << std::endl;
     }

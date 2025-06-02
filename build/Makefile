@@ -129,6 +129,30 @@ spotify-cli/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/spotify-cli.dir/build.make CMakeFiles/spotify-cli.dir/build
 .PHONY : spotify-cli/fast
 
+base64.o: base64.cpp.o
+.PHONY : base64.o
+
+# target to build an object file
+base64.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spotify-cli.dir/build.make CMakeFiles/spotify-cli.dir/base64.cpp.o
+.PHONY : base64.cpp.o
+
+base64.i: base64.cpp.i
+.PHONY : base64.i
+
+# target to preprocess a source file
+base64.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spotify-cli.dir/build.make CMakeFiles/spotify-cli.dir/base64.cpp.i
+.PHONY : base64.cpp.i
+
+base64.s: base64.cpp.s
+.PHONY : base64.s
+
+# target to generate assembly for a file
+base64.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spotify-cli.dir/build.make CMakeFiles/spotify-cli.dir/base64.cpp.s
+.PHONY : base64.cpp.s
+
 login.o: login.cpp.o
 .PHONY : login.o
 
@@ -234,6 +258,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... spotify-cli"
+	@echo "... base64.o"
+	@echo "... base64.i"
+	@echo "... base64.s"
 	@echo "... login.o"
 	@echo "... login.i"
 	@echo "... login.s"

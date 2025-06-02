@@ -12,4 +12,5 @@ bool refreshAccessToken( Tokens& tokens, const std::string& clientId, const std:
 bool saveTokens(const Tokens& tokens, const std::string& filename);
 bool loadTokens(Tokens& tokens, const std::string& filename);
 bool isTokenExpired(long expires_at);
+bool downloadImage(const std::string& imageUrl, const std::string& filename);
 

@@ -13,6 +13,7 @@ add_executable(spotify-cli
     login.cpp
     token.cpp
     spotify_api.h
+    base64.cpp
     base64.h
 )
 

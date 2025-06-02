@@ -81,3 +81,24 @@ bool isTokenExpired(long expires_at) {
     auto now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     return now >= expires_at;
 }
+
+
+bool downloadImage(const std::string& imageUrl, const std::string& filename) {
+    cpr::Response r = cpr::Get(cpr::Url{imageUrl});
+    // std::cout << r;
+    std::cout << imageUrl;
+
+    if (r.status_code == 200) {
+        std::ofstream file(filename, std::ios::binary);
+        if (!file) {
+            std::cerr << "Failed to open file for writing: " << filename << std::endl;
+            return false;
+        }
+        file.write(r.text.c_str(), r.text.size());
+        file.close();
+        return true;
+    } else {
+        std::cerr << "Failed to download image, HTTP status: " << r.status_code << std::endl;
+        return false;
+    }
+}

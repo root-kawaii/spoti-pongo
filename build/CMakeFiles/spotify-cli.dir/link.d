@@ -6,6 +6,7 @@ spotify-cli: \
   CMakeFiles/spotify-cli.dir/spotify_api.cpp.o \
   CMakeFiles/spotify-cli.dir/login.cpp.o \
   CMakeFiles/spotify-cli.dir/token.cpp.o \
+  CMakeFiles/spotify-cli.dir/base64.cpp.o \
   /home/monolith/vcpkg/installed/x64-linux/debug/lib/libcpr.a \
   /home/monolith/vcpkg/installed/x64-linux/debug/lib/libcurl-d.a \
   /home/monolith/vcpkg/installed/x64-linux/lib/libz.a \
@@ -52,6 +53,8 @@ CMakeFiles/spotify-cli.dir/spotify_api.cpp.o:
 CMakeFiles/spotify-cli.dir/login.cpp.o:
 
 CMakeFiles/spotify-cli.dir/token.cpp.o:
+
+CMakeFiles/spotify-cli.dir/base64.cpp.o:
 
 /home/monolith/vcpkg/installed/x64-linux/debug/lib/libcpr.a:
 

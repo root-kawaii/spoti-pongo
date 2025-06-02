@@ -29,7 +29,6 @@ std::string urlEncode(const std::string& value) {
 }
 
 
-
 std::string generateRandomString(size_t length) {
     static const char charset[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static std::default_random_engine rng(std::random_device{}());

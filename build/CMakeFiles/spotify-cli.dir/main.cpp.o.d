@@ -296,4 +296,5 @@ CMakeFiles/spotify-cli.dir/main.cpp.o: \
  /home/monolith/vcpkg/installed/x64-linux/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
  /home/monolith/Desktop/spotify-cli/spotify_api.h \
  /home/monolith/Desktop/spotify-cli/login.h \
- /home/monolith/Desktop/spotify-cli/token.h
+ /home/monolith/Desktop/spotify-cli/token.h \
+ /home/monolith/Desktop/spotify-cli/base64.h
