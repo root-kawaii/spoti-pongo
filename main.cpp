@@ -5,6 +5,11 @@
 #include "login.h"
 #include "token.h"
 #include "base64.h"
+#include <curl/curl.h>
+#include <chrono>
+#include <thread>
+#include <sys/ioctl.h>
+#include <unistd.h>
 
 struct Track {
     std::string song_name;
@@ -18,17 +23,26 @@ struct Track {
 
 // Forward declaration
 void extractUri(const nlohmann::json& result, std::vector<Track>& tracks);
+void turnOnDevice(std::string deviceName);
+void activateDevice(std::string device, std::string access );
+size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp);
+std::string getSpotifyDevices(const std::string& access_token);
+int getTerminalWidth();
 
 
 // Assuming SpotifyAPI and playSpotifyTrack are defined somewhere else
 
 int main() {
+
     std::vector<Track> tracks;
     std::string clientId = "9637f87558ee43a5a9c2557163c453a7";
     std::string clientSecret = "ea1e9c60354a44178a6677108cb25640";
     // std::string accessToken = "BQAVrhA5scIKjVCmnEfjBN6TCiEkJlYgDuSjL1mGD37f7TCi73EPM8LWzWogoor6sMPQdDrAg0xQ_ZYgWwBtIWHS7iDjEV7_0D7DCQhuKWpE7bLs48mOybGEnA_1vwrSRfn-UkSSGT9Bwg_FkMtbLSLVG5Do8M3llL9dFYCStr02eSvKAATxBcMYnkHnEy0r14Kjf5LlOtSKYOwj12DyzblXMs1KbUgBHsj5dR3o3I-f5Kk";
     Tokens tokens;
+
     loadTokens(tokens, "tokens.json");
+    turnOnDevice("Coglionazzo");
+    activateDevice(getSpotifyDevices(tokens.access_token), tokens.access_token);
 
     // exchangeCodeForToken("AQCGgjt2Lv8Takz6HODddumKy2dtomP6eP6ZzZceTKHZo-uwCn6eRhDPLYzq_r5d11WHY9TtZLBJaIlGnWPS_sB1xzE2wUbVqpb_Hl0uC8F_xaP3ZmExWFDQdp1zUih69gb3-Geeah3QgDTMdbtgcrWGBiOu3WKYfkbv7NoyE3NwOH9xjsfi8GRXlHzCuaOjAqWHis5CPw5bSvOSixUjVSDM6o-BT4zaUwcr_rmw6IvwcjIBzIIkJKLBEUsIvOODoG4Neqk7y2ynbu2r_0L5xvKVxLOmFHMXFsISLQ");
 
@@ -94,7 +108,7 @@ int main() {
 
             std::cout << "Playing track -- " << selectedTrack.song_name << " -- " << selectedTrack.artist << "\n";
             downloadImage(selectedTrack.cover, "buffer.txt");
-            printImageToKittyTerminal("buffer.txt");
+            printImageGeneric("buffer.txt");
             api.playSpotifyTrack(selectedTrack.song_uri);  // Pass argument as URI
 
         } else {
@@ -107,9 +121,13 @@ int main() {
 }
 
 void extractUri(const nlohmann::json& result, std::vector<Track>& tracks) {
-    try {
+    // try {
         const auto& items = result["tracks"]["items"];
         int limit = std::min(15, static_cast<int>(items.size()));
+
+        int termWidth = getTerminalWidth();
+        int imageStartCol = 4 * termWidth / 3; // Keep some spacing
+
 
         for (int i = 0; i < limit; ++i) {
             Track new_track;
@@ -124,21 +142,17 @@ void extractUri(const nlohmann::json& result, std::vector<Track>& tracks) {
                 artistNames += artist.value("name", "Unknown Artist");
             }
 
-            // Extract album name
             std::string albumName = track["album"].value("name", "Unknown Album");
 
-            // Extract album cover URL (take the first image)
             std::string albumCoverUrl = "N/A";
             if (!track["album"]["images"].empty()) {
                 albumCoverUrl = track["album"]["images"][0].value("url", "N/A");
             }
 
-            // Extract duration (convert from ms to mm:ss)
             int durationMs = track.value("duration_ms", 0);
             int minutes = durationMs / 60000;
             int seconds = (durationMs % 60000) / 1000;
 
-            // ✅ Extract URI
             std::string uri = track.value("uri", "N/A");
 
             new_track.album = albumName;
@@ -146,21 +160,138 @@ void extractUri(const nlohmann::json& result, std::vector<Track>& tracks) {
             new_track.cover = albumCoverUrl;
             new_track.length = seconds;
             new_track.artist = artistNames;
-            new_track.song_uri = uri; 
+            new_track.song_uri = uri;
             tracks.push_back(new_track);
 
-            // Output everything
+            downloadImage(new_track.cover, "buffer.txt");
+
+            // Save cursor position
+            std::cout << "\033[s"; // Save cursor position
+
+            // Move to the right (column 60 for example)
+            std::cout << "\033[" << imageStartCol << "G" << std::flush;  // Move cursor right to column 60
+
+            // Print the image (it will render downwards from current line)
+            printImageGeneric("buffer.txt");
+
+            // Restore cursor to left and overwrite any stray text with blank lines
+            std::cout << "\033[1G"; // Restore cursor to saved left-side position
+
+            // Print text block on the left (this overwrites any accidental titles on the right)
             std::cout << "Track:   " << trackName << "\n"
-                      << "Artist:  " << artistNames << "\n"
-                      << "Album:   " << new_track.album << "\n"
-                      << "Length:  " << minutes << ":" << std::setfill('0') << std::setw(2) << seconds << "\n"
-                      << "Cover:   " << albumCoverUrl << "\n"
-                      << "--------------------------------------------\n";
+                    << "Artist:  " << artistNames << "\n"
+                    << "Album:   " << new_track.album << "\n"
+                    << "Length:  " << minutes << ":" << std::setfill('0') << std::setw(2) << seconds << "\n"
+                    << "--------------------------------------------\n";
+
+}
+}
+
+
+
+
+void turnOnDevice(std::string deviceName){
+std::string command = "librespot --cache " + std::string(getenv("HOME")) + 
+                      "/.cache/librespot --name " + deviceName + 
+                      " --backend pipe | ffplay -f s16le -ar 88200 -nodisp - > /dev/null 2>&1 &";
+system(command.c_str());
+
+
+}
+
+
+void activateDevice(std::string device, std::string access ){
+    std::this_thread::sleep_for(std::chrono::seconds(5));
+    const std::string access_token = access;
+    const std::string device_id = device;
+    // JSON data to send
+    std::string json_data = R"({"device_ids": [")" + device_id + R"("], "play": true})";
+
+    CURL *curl = curl_easy_init();
+    if (!curl) {
+        std::cerr << "Failed to initialize curl" << std::endl;
+    }
+
+    struct curl_slist *headers = nullptr;
+    headers = curl_slist_append(headers, ("Authorization: Bearer " + access_token).c_str());
+    headers = curl_slist_append(headers, "Content-Type: application/json");
+
+    curl_easy_setopt(curl, CURLOPT_URL, "https://api.spotify.com/v1/me/player");
+    curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "PUT");
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_data.c_str());
+
+    CURLcode res = curl_easy_perform(curl);
+    if (res != CURLE_OK)
+        std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
+    else
+        std::cout << "Playback transferred successfully!" << std::endl;
+
+    curl_slist_free_all(headers);
+    curl_easy_cleanup(curl);
+    std::this_thread::sleep_for(std::chrono::seconds(5));
+
+}
+
+
+size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
+    size_t totalSize = size * nmemb;
+    std::string* str = static_cast<std::string*>(userp);
+    str->append(static_cast<char*>(contents), totalSize);
+    return totalSize;
+}
+
+std::string getSpotifyDevices(const std::string& access_token) {
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+
+    CURL* curl = curl_easy_init();
+    if (!curl) {
+        std::cerr << "Failed to init curl" << std::endl;
+        return "";
+    }
+
+    std::string response_str;
+    struct curl_slist* headers = nullptr;
+    std::string auth_header = "Authorization: Bearer " + access_token;
+    headers = curl_slist_append(headers, auth_header.c_str());
+    headers = curl_slist_append(headers, "Content-Type: application/json");
+
+    curl_easy_setopt(curl, CURLOPT_URL, "https://api.spotify.com/v1/me/player/devices");
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_str);
+
+    CURLcode res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
+        response_str = "";
+    }
+
+    curl_slist_free_all(headers);
+    curl_easy_cleanup(curl);
+
+    if (response_str.empty()) {
+        return "";
+    }
+
+    try {
+        nlohmann::json response_json = nlohmann::json::parse(response_str);
+
+        if (!response_json["devices"].empty()) {
+            return response_json["devices"][0]["id"].get<std::string>();
+        } else {
+            std::cerr << "No devices found in response." << std::endl;
+            return "";
         }
-
-
     } catch (const std::exception& e) {
-        std::cerr << "Failed to extract track info: " << e.what() << std::endl;
+        std::cerr << "JSON parse error: " << e.what() << std::endl;
+        return "";
     }
 }
 
+
+int getTerminalWidth() {
+    struct winsize w;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    return w.ws_col;
+}

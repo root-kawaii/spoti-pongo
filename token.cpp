@@ -85,8 +85,6 @@ bool isTokenExpired(long expires_at) {
 
 bool downloadImage(const std::string& imageUrl, const std::string& filename) {
     cpr::Response r = cpr::Get(cpr::Url{imageUrl});
-    // std::cout << r;
-    std::cout << imageUrl;
 
     if (r.status_code == 200) {
         std::ofstream file(filename, std::ios::binary);

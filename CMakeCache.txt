@@ -148,7 +148,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=SpotifyCLI
+CMAKE_PROJECT_NAME:STATIC=spotify-cli
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -226,6 +226,15 @@ SpotifyCLI_SOURCE_DIR:STATIC=/home/monolith/Desktop/spotify-cli
 
 //The directory containing a CMake configuration file for cpr.
 cpr_DIR:PATH=cpr_DIR-NOTFOUND
+
+//Value Computed by CMake
+spotify-cli_BINARY_DIR:STATIC=/home/monolith/Desktop/spotify-cli
+
+//Value Computed by CMake
+spotify-cli_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+spotify-cli_SOURCE_DIR:STATIC=/home/monolith/Desktop/spotify-cli
 
 
 ########################

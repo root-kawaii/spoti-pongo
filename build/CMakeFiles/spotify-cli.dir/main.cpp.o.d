@@ -297,4 +297,39 @@ CMakeFiles/spotify-cli.dir/main.cpp.o: \
  /home/monolith/Desktop/spotify-cli/spotify_api.h \
  /home/monolith/Desktop/spotify-cli/login.h \
  /home/monolith/Desktop/spotify-cli/token.h \
- /home/monolith/Desktop/spotify-cli/base64.h
+ /home/monolith/Desktop/spotify-cli/base64.h \
+ /home/monolith/vcpkg/installed/x64-linux/include/curl/curl.h \
+ /home/monolith/vcpkg/installed/x64-linux/include/curl/curlver.h \
+ /home/monolith/vcpkg/installed/x64-linux/include/curl/system.h \
+ /usr/include/sys/socket.h /usr/include/bits/types/struct_iovec.h \
+ /usr/include/bits/socket.h /usr/include/bits/socket_type.h \
+ /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+ /usr/include/asm-generic/socket.h /usr/include/asm/sockios.h \
+ /usr/include/asm-generic/sockios.h \
+ /usr/include/bits/types/struct_osockaddr.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/limits.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
+ /usr/include/bits/uio_lim.h /usr/include/sys/time.h \
+ /home/monolith/vcpkg/installed/x64-linux/include/curl/easy.h \
+ /home/monolith/vcpkg/installed/x64-linux/include/curl/multi.h \
+ /home/monolith/vcpkg/installed/x64-linux/include/curl/curl.h \
+ /home/monolith/vcpkg/installed/x64-linux/include/curl/urlapi.h \
+ /home/monolith/vcpkg/installed/x64-linux/include/curl/options.h \
+ /home/monolith/vcpkg/installed/x64-linux/include/curl/header.h \
+ /home/monolith/vcpkg/installed/x64-linux/include/curl/websockets.h \
+ /home/monolith/vcpkg/installed/x64-linux/include/curl/mprintf.h \
+ /usr/include/c++/15.1.1/chrono /usr/include/c++/15.1.1/thread \
+ /usr/include/c++/15.1.1/bits/std_thread.h \
+ /usr/include/c++/15.1.1/bits/this_thread_sleep.h \
+ /usr/include/sys/ioctl.h /usr/include/bits/ioctls.h \
+ /usr/include/asm/ioctls.h /usr/include/asm-generic/ioctls.h \
+ /usr/include/linux/ioctl.h /usr/include/asm/ioctl.h \
+ /usr/include/asm-generic/ioctl.h /usr/include/bits/ioctl-types.h \
+ /usr/include/sys/ttydefaults.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
+ /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
+ /usr/include/bits/getopt_core.h /usr/include/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h
