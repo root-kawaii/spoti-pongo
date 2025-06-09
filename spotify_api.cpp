@@ -59,7 +59,7 @@ void SpotifyAPI::playSpotifyTrack(const std::string& track_uri) {
     );
 
     if (r.status_code == 204) {
-        // std::cout << "Track is now playing.\n";
+        std::cout << "Track is now playing.\n";
     } else {
         std::cerr << "Error (" << r.status_code << "): " << r.text << std::endl;
     }

@@ -26,14 +26,25 @@ void extractUri(const nlohmann::json& result, std::vector<Track>& tracks);
 void turnOnDevice(std::string deviceName);
 void activateDevice(std::string device, std::string access );
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp);
-std::string getSpotifyDevices(const std::string& access_token);
+std::string getSpotifyDevices(const std::string& access_token, std::string deviceName);
 int getTerminalWidth();
+
+void enterFullscreenTerminal() {
+    std::cout << "\033[?1049h\033[H\033[2J\033[?25l";  // Alternate buffer, home, clear screen, hide cursor
+    std::cout.flush();
+}
+
+void exitFullscreenTerminal() {
+    std::cout << "\033[?1049l\033[?25h";  // Restore buffer, show cursor
+    std::cout.flush();
+}
+
 
 
 // Assuming SpotifyAPI and playSpotifyTrack are defined somewhere else
 
 int main() {
-
+    enterFullscreenTerminal(); 
     std::vector<Track> tracks;
     std::string clientId = "9637f87558ee43a5a9c2557163c453a7";
     std::string clientSecret = "ea1e9c60354a44178a6677108cb25640";
@@ -42,13 +53,14 @@ int main() {
 
     loadTokens(tokens, "tokens.json");
     turnOnDevice("Coglionazzo");
-    activateDevice(getSpotifyDevices(tokens.access_token), tokens.access_token);
+    activateDevice(getSpotifyDevices(tokens.access_token, "Coglionazzo"), tokens.access_token);
 
     // exchangeCodeForToken("AQCGgjt2Lv8Takz6HODddumKy2dtomP6eP6ZzZceTKHZo-uwCn6eRhDPLYzq_r5d11WHY9TtZLBJaIlGnWPS_sB1xzE2wUbVqpb_Hl0uC8F_xaP3ZmExWFDQdp1zUih69gb3-Geeah3QgDTMdbtgcrWGBiOu3WKYfkbv7NoyE3NwOH9xjsfi8GRXlHzCuaOjAqWHis5CPw5bSvOSixUjVSDM6o-BT4zaUwcr_rmw6IvwcjIBzIIkJKLBEUsIvOODoG4Neqk7y2ynbu2r_0L5xvKVxLOmFHMXFsISLQ");
 
     SpotifyAPI api(clientId, clientSecret, tokens.access_token);
     if (!api.authenticate()) {
         std::cerr << "Authentication failed.\n";
+        exitFullscreenTerminal();
         return 1;
     }
 
@@ -116,14 +128,14 @@ int main() {
             std::cout << "Commands: search \"Song Name\", play TRACK_URI, quit\n";
         }
     }
-
+    exitFullscreenTerminal();
     return 0;
 }
 
 void extractUri(const nlohmann::json& result, std::vector<Track>& tracks) {
     // try {
         const auto& items = result["tracks"]["items"];
-        int limit = std::min(15, static_cast<int>(items.size()));
+        int limit = std::min(4, static_cast<int>(items.size()));
 
         int termWidth = getTerminalWidth();
         int imageStartCol = 4 * termWidth / 3; // Keep some spacing
@@ -191,7 +203,7 @@ void extractUri(const nlohmann::json& result, std::vector<Track>& tracks) {
 
 
 void turnOnDevice(std::string deviceName){
-std::string command = "librespot --cache " + std::string(getenv("HOME")) + 
+std::string command = "librespot --disable-audio-cache --cache " + std::string(getenv("HOME")) + 
                       "/.cache/librespot --name " + deviceName + 
                       " --backend pipe | ffplay -f s16le -ar 88200 -nodisp - > /dev/null 2>&1 &";
 system(command.c_str());
@@ -201,7 +213,7 @@ system(command.c_str());
 
 
 void activateDevice(std::string device, std::string access ){
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+    std::this_thread::sleep_for(std::chrono::seconds(1));
     const std::string access_token = access;
     const std::string device_id = device;
     // JSON data to send
@@ -229,7 +241,7 @@ void activateDevice(std::string device, std::string access ){
 
     curl_slist_free_all(headers);
     curl_easy_cleanup(curl);
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+    std::this_thread::sleep_for(std::chrono::seconds(1));
 
 }
 
@@ -241,7 +253,7 @@ size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
     return totalSize;
 }
 
-std::string getSpotifyDevices(const std::string& access_token) {
+std::string getSpotifyDevices(const std::string& access_token, std::string deviceName) {
     std::this_thread::sleep_for(std::chrono::seconds(1));
 
     CURL* curl = curl_easy_init();
@@ -278,6 +290,11 @@ std::string getSpotifyDevices(const std::string& access_token) {
         nlohmann::json response_json = nlohmann::json::parse(response_str);
 
         if (!response_json["devices"].empty()) {
+            for(int j=0; j < 10000; j++){
+                std::cout << response_json["devices"][j];
+                if(response_json["devices"][j]["name"] == deviceName) return response_json["devices"][j]["id"].get<std::string>();
+            }
+
             return response_json["devices"][0]["id"].get<std::string>();
         } else {
             std::cerr << "No devices found in response." << std::endl;
