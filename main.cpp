@@ -22,12 +22,14 @@ struct Track {
 };
 
 // Forward declaration
-void extractUri(const nlohmann::json& result, std::vector<Track>& tracks);
+void extractUri(const nlohmann::json& result, std::vector<Track>& tracks, SpotifyAPI& api);
 void turnOnDevice(std::string deviceName);
 void activateDevice(std::string device, std::string access );
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp);
 std::string getSpotifyDevices(const std::string& access_token, std::string deviceName);
 int getTerminalWidth();
+void preCacheTrack(const std::string& uri, SpotifyAPI& api);
+
 
 void enterFullscreenTerminal() {
     std::cout << "\033[?1049h\033[H\033[2J\033[?25l";  // Alternate buffer, home, clear screen, hide cursor
@@ -44,7 +46,7 @@ void exitFullscreenTerminal() {
 // Assuming SpotifyAPI and playSpotifyTrack are defined somewhere else
 
 int main() {
-    enterFullscreenTerminal(); 
+    // enterFullscreenTerminal(); 
     std::vector<Track> tracks;
     std::string clientId = "9637f87558ee43a5a9c2557163c453a7";
     std::string clientSecret = "ea1e9c60354a44178a6677108cb25640";
@@ -57,7 +59,7 @@ int main() {
 
     // exchangeCodeForToken("AQCGgjt2Lv8Takz6HODddumKy2dtomP6eP6ZzZceTKHZo-uwCn6eRhDPLYzq_r5d11WHY9TtZLBJaIlGnWPS_sB1xzE2wUbVqpb_Hl0uC8F_xaP3ZmExWFDQdp1zUih69gb3-Geeah3QgDTMdbtgcrWGBiOu3WKYfkbv7NoyE3NwOH9xjsfi8GRXlHzCuaOjAqWHis5CPw5bSvOSixUjVSDM6o-BT4zaUwcr_rmw6IvwcjIBzIIkJKLBEUsIvOODoG4Neqk7y2ynbu2r_0L5xvKVxLOmFHMXFsISLQ");
 
-    SpotifyAPI api(clientId, clientSecret, tokens.access_token);
+    SpotifyAPI api(clientId, clientSecret, tokens.access_token, getSpotifyDevices(tokens.access_token, "Coglionazzo"));
     if (!api.authenticate()) {
         std::cerr << "Authentication failed.\n";
         exitFullscreenTerminal();
@@ -107,8 +109,7 @@ int main() {
                 std::cerr << "No result returned from search.\n";
                 continue;
             }
-
-            extractUri(*result, tracks);
+            extractUri(*result, tracks, api);
 
         } else if (command == "play") {
             if (argument.empty()) {
@@ -132,7 +133,7 @@ int main() {
     return 0;
 }
 
-void extractUri(const nlohmann::json& result, std::vector<Track>& tracks) {
+void extractUri(const nlohmann::json& result, std::vector<Track>& tracks, SpotifyAPI& api) {
     // try {
         const auto& items = result["tracks"]["items"];
         int limit = std::min(4, static_cast<int>(items.size()));
@@ -175,7 +176,12 @@ void extractUri(const nlohmann::json& result, std::vector<Track>& tracks) {
             new_track.song_uri = uri;
             tracks.push_back(new_track);
 
+
             downloadImage(new_track.cover, "buffer.txt");
+
+            std::thread([&api, uri]() {
+                preCacheTrack(uri, api);
+            }).detach();
 
             // Save cursor position
             std::cout << "\033[s"; // Save cursor position
@@ -197,6 +203,7 @@ void extractUri(const nlohmann::json& result, std::vector<Track>& tracks) {
                     << "--------------------------------------------\n";
 
 }
+
 }
 
 
@@ -311,4 +318,14 @@ int getTerminalWidth() {
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     return w.ws_col;
+}
+
+
+void preCacheTrack(const std::string& uri, SpotifyAPI& api) {
+    std::cout << "Pre-caching track: " << uri << "\n";
+    std::this_thread::sleep_for(std::chrono::seconds(5));  // Let it buffer
+    api.playTrackSilentlyForCaching(uri);
+    std::this_thread::sleep_for(std::chrono::seconds(5));  // Let it buffer
+    api.pausePlayback();  // You must implement this in SpotifyAPI
+    std::cout << "Pre-cached successfully.\n";
 }
