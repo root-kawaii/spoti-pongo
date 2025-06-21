@@ -50,7 +50,7 @@ void SpotifyAPI::playSpotifyTrack(const std::string& track_uri) {
         {"uris", {track_uri}}  // Example: "spotify:track:4zpNfuWJA3K4d9TS4qnOIB"
     };
 
-    std::this_thread::sleep_for(std::chrono::seconds(5));  // Let it buffer
+    // std::this_thread::sleep_for(std::chrono::seconds(5));  // Let it buffer
 
     cpr::Response r = cpr::Put(
         cpr::Url{url},

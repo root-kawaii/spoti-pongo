@@ -145,11 +145,44 @@ CMakeFiles/spotify-cli.dir/main.cpp.o: \
  /usr/include/c++/15.1.1/bits/basic_ios.tcc \
  /usr/include/c++/15.1.1/bits/ostream.tcc /usr/include/c++/15.1.1/istream \
  /usr/include/c++/15.1.1/bits/istream.tcc \
+ /home/monolith/Desktop/spotify-cli/audio_cache.h \
+ /usr/include/c++/15.1.1/queue /usr/include/c++/15.1.1/deque \
+ /usr/include/c++/15.1.1/bits/stl_uninitialized.h \
+ /usr/include/c++/15.1.1/bits/stl_deque.h \
+ /usr/include/c++/15.1.1/bits/deque.tcc /usr/include/c++/15.1.1/vector \
+ /usr/include/c++/15.1.1/bits/stl_vector.h \
+ /usr/include/c++/15.1.1/bits/stl_bvector.h \
+ /usr/include/c++/15.1.1/bits/vector.tcc \
+ /usr/include/c++/15.1.1/bits/stl_heap.h \
+ /usr/include/c++/15.1.1/bits/stl_queue.h /usr/include/c++/15.1.1/mutex \
+ /usr/include/c++/15.1.1/bits/chrono.h /usr/include/c++/15.1.1/ratio \
+ /usr/include/c++/15.1.1/cstdint \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
+ /usr/include/bits/stdint-least.h /usr/include/c++/15.1.1/limits \
+ /usr/include/c++/15.1.1/ctime \
+ /usr/include/c++/15.1.1/bits/parse_numbers.h \
+ /usr/include/c++/15.1.1/bits/std_mutex.h \
+ /usr/include/c++/15.1.1/bits/unique_lock.h \
+ /usr/include/c++/15.1.1/condition_variable \
+ /usr/include/c++/15.1.1/bits/shared_ptr.h \
+ /usr/include/c++/15.1.1/bits/shared_ptr_base.h \
+ /usr/include/c++/15.1.1/bits/allocated_ptr.h \
+ /usr/include/c++/15.1.1/bits/unique_ptr.h \
+ /usr/include/c++/15.1.1/ext/aligned_buffer.h \
+ /usr/include/c++/15.1.1/ext/concurrence.h /usr/include/c++/15.1.1/thread \
+ /usr/include/c++/15.1.1/bits/std_thread.h \
+ /usr/include/c++/15.1.1/bits/this_thread_sleep.h \
+ /usr/include/c++/15.1.1/fstream /usr/include/c++/15.1.1/bits/codecvt.h \
+ /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/basic_file.h \
+ /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++io.h \
+ /usr/include/c++/15.1.1/bits/fstream.tcc /usr/include/c++/15.1.1/atomic \
+ /usr/include/c++/15.1.1/bits/atomic_base.h \
+ /usr/include/c++/15.1.1/bits/atomic_lockfree_defines.h \
  /home/monolith/vcpkg/installed/x64-linux/include/nlohmann/json.hpp \
  /usr/include/c++/15.1.1/algorithm \
  /usr/include/c++/15.1.1/bits/stl_algo.h \
  /usr/include/c++/15.1.1/bits/algorithmfwd.h \
- /usr/include/c++/15.1.1/bits/stl_heap.h \
  /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
  /usr/include/c++/15.1.1/bits/stl_tempbuf.h \
  /usr/include/c++/15.1.1/pstl/glue_algorithm_defs.h \
@@ -160,27 +193,15 @@ CMakeFiles/spotify-cli.dir/main.cpp.o: \
  /usr/include/c++/15.1.1/bits/unordered_map.h \
  /usr/include/c++/15.1.1/bits/hashtable.h \
  /usr/include/c++/15.1.1/bits/hashtable_policy.h \
- /usr/include/c++/15.1.1/ext/aligned_buffer.h \
  /usr/include/c++/15.1.1/bits/enable_special_members.h \
  /usr/include/c++/15.1.1/bits/node_handle.h \
- /usr/include/c++/15.1.1/bits/erase_if.h /usr/include/c++/15.1.1/vector \
- /usr/include/c++/15.1.1/bits/stl_uninitialized.h \
- /usr/include/c++/15.1.1/bits/stl_vector.h \
- /usr/include/c++/15.1.1/bits/stl_bvector.h \
- /usr/include/c++/15.1.1/bits/vector.tcc /usr/include/c++/15.1.1/array \
+ /usr/include/c++/15.1.1/bits/erase_if.h /usr/include/c++/15.1.1/array \
  /usr/include/c++/15.1.1/compare /usr/include/c++/15.1.1/iterator \
  /usr/include/c++/15.1.1/bits/stream_iterator.h \
  /usr/include/c++/15.1.1/memory \
  /usr/include/c++/15.1.1/bits/stl_raw_storage_iter.h \
  /usr/include/c++/15.1.1/bits/align.h \
- /usr/include/c++/15.1.1/bits/unique_ptr.h \
- /usr/include/c++/15.1.1/bits/shared_ptr.h \
- /usr/include/c++/15.1.1/bits/shared_ptr_base.h \
- /usr/include/c++/15.1.1/bits/allocated_ptr.h \
- /usr/include/c++/15.1.1/ext/concurrence.h \
  /usr/include/c++/15.1.1/bits/shared_ptr_atomic.h \
- /usr/include/c++/15.1.1/bits/atomic_base.h \
- /usr/include/c++/15.1.1/bits/atomic_lockfree_defines.h \
  /usr/include/c++/15.1.1/backward/auto_ptr.h \
  /usr/include/c++/15.1.1/pstl/glue_memory_defs.h \
  /usr/include/c++/15.1.1/utility \
@@ -202,7 +223,7 @@ CMakeFiles/spotify-cli.dir/main.cpp.o: \
  /usr/include/bits/mathcalls-helper-functions.h \
  /usr/include/bits/mathcalls.h /usr/include/bits/mathcalls-narrow.h \
  /usr/include/bits/iscanonical.h /usr/include/c++/15.1.1/bits/specfun.h \
- /usr/include/c++/15.1.1/limits /usr/include/c++/15.1.1/tr1/gamma.tcc \
+ /usr/include/c++/15.1.1/tr1/gamma.tcc \
  /usr/include/c++/15.1.1/tr1/special_function_util.h \
  /usr/include/c++/15.1.1/tr1/bessel_function.tcc \
  /usr/include/c++/15.1.1/tr1/beta_function.tcc \
@@ -225,10 +246,6 @@ CMakeFiles/spotify-cli.dir/main.cpp.o: \
  /usr/include/c++/15.1.1/bits/indirect_array.h \
  /home/monolith/vcpkg/installed/x64-linux/include/nlohmann/detail/exceptions.hpp \
  /home/monolith/vcpkg/installed/x64-linux/include/nlohmann/detail/value_t.hpp \
- /usr/include/c++/15.1.1/cstdint \
- /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stdint.h \
- /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
- /usr/include/bits/stdint-least.h \
  /home/monolith/vcpkg/installed/x64-linux/include/nlohmann/detail/macro_scope.hpp \
  /home/monolith/vcpkg/installed/x64-linux/include/nlohmann/detail/meta/detected.hpp \
  /home/monolith/vcpkg/installed/x64-linux/include/nlohmann/detail/meta/void_t.hpp \
@@ -249,14 +266,11 @@ CMakeFiles/spotify-cli.dir/main.cpp.o: \
  /home/monolith/vcpkg/installed/x64-linux/include/nlohmann/detail/meta/identity_tag.hpp \
  /home/monolith/vcpkg/installed/x64-linux/include/nlohmann/detail/meta/std_fs.hpp \
  /usr/include/c++/15.1.1/filesystem /usr/include/c++/15.1.1/bits/fs_fwd.h \
- /usr/include/c++/15.1.1/bits/chrono.h /usr/include/c++/15.1.1/ratio \
- /usr/include/c++/15.1.1/ctime \
- /usr/include/c++/15.1.1/bits/parse_numbers.h \
  /usr/include/c++/15.1.1/bits/fs_path.h /usr/include/c++/15.1.1/locale \
  /usr/include/c++/15.1.1/bits/locale_facets_nonio.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/time_members.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/messages_members.h \
- /usr/include/libintl.h /usr/include/c++/15.1.1/bits/codecvt.h \
+ /usr/include/libintl.h \
  /usr/include/c++/15.1.1/bits/locale_facets_nonio.tcc \
  /usr/include/c++/15.1.1/bits/locale_conv.h \
  /usr/include/c++/15.1.1/iomanip \
@@ -321,15 +335,12 @@ CMakeFiles/spotify-cli.dir/main.cpp.o: \
  /home/monolith/vcpkg/installed/x64-linux/include/curl/header.h \
  /home/monolith/vcpkg/installed/x64-linux/include/curl/websockets.h \
  /home/monolith/vcpkg/installed/x64-linux/include/curl/mprintf.h \
- /usr/include/c++/15.1.1/chrono /usr/include/c++/15.1.1/thread \
- /usr/include/c++/15.1.1/bits/std_thread.h \
- /usr/include/c++/15.1.1/bits/this_thread_sleep.h \
- /usr/include/sys/ioctl.h /usr/include/bits/ioctls.h \
- /usr/include/asm/ioctls.h /usr/include/asm-generic/ioctls.h \
- /usr/include/linux/ioctl.h /usr/include/asm/ioctl.h \
- /usr/include/asm-generic/ioctl.h /usr/include/bits/ioctl-types.h \
- /usr/include/sys/ttydefaults.h /usr/include/unistd.h \
- /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
- /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
- /usr/include/bits/getopt_core.h /usr/include/bits/unistd_ext.h \
- /usr/include/linux/close_range.h
+ /usr/include/c++/15.1.1/chrono /usr/include/sys/ioctl.h \
+ /usr/include/bits/ioctls.h /usr/include/asm/ioctls.h \
+ /usr/include/asm-generic/ioctls.h /usr/include/linux/ioctl.h \
+ /usr/include/asm/ioctl.h /usr/include/asm-generic/ioctl.h \
+ /usr/include/bits/ioctl-types.h /usr/include/sys/ttydefaults.h \
+ /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+ /usr/include/bits/environments.h /usr/include/bits/confname.h \
+ /usr/include/bits/getopt_posix.h /usr/include/bits/getopt_core.h \
+ /usr/include/bits/unistd_ext.h /usr/include/linux/close_range.h

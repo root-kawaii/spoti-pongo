@@ -3,6 +3,7 @@ spotify-cli: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/crtbeginS.o \
   CMakeFiles/spotify-cli.dir/main.cpp.o \
+  CMakeFiles/spotify-cli.dir/audio_cache.cpp.o \
   CMakeFiles/spotify-cli.dir/spotify_api.cpp.o \
   CMakeFiles/spotify-cli.dir/login.cpp.o \
   CMakeFiles/spotify-cli.dir/token.cpp.o \
@@ -47,6 +48,8 @@ spotify-cli: \
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/crtbeginS.o:
 
 CMakeFiles/spotify-cli.dir/main.cpp.o:
+
+CMakeFiles/spotify-cli.dir/audio_cache.cpp.o:
 
 CMakeFiles/spotify-cli.dir/spotify_api.cpp.o:
 

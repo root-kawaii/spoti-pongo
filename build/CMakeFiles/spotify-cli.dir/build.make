@@ -86,10 +86,24 @@ CMakeFiles/spotify-cli.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/spotify-cli.dir/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/monolith/Desktop/spotify-cli/main.cpp -o CMakeFiles/spotify-cli.dir/main.cpp.s
 
+CMakeFiles/spotify-cli.dir/audio_cache.cpp.o: CMakeFiles/spotify-cli.dir/flags.make
+CMakeFiles/spotify-cli.dir/audio_cache.cpp.o: /home/monolith/Desktop/spotify-cli/audio_cache.cpp
+CMakeFiles/spotify-cli.dir/audio_cache.cpp.o: CMakeFiles/spotify-cli.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/monolith/Desktop/spotify-cli/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/spotify-cli.dir/audio_cache.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/spotify-cli.dir/audio_cache.cpp.o -MF CMakeFiles/spotify-cli.dir/audio_cache.cpp.o.d -o CMakeFiles/spotify-cli.dir/audio_cache.cpp.o -c /home/monolith/Desktop/spotify-cli/audio_cache.cpp
+
+CMakeFiles/spotify-cli.dir/audio_cache.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/spotify-cli.dir/audio_cache.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/monolith/Desktop/spotify-cli/audio_cache.cpp > CMakeFiles/spotify-cli.dir/audio_cache.cpp.i
+
+CMakeFiles/spotify-cli.dir/audio_cache.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/spotify-cli.dir/audio_cache.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/monolith/Desktop/spotify-cli/audio_cache.cpp -o CMakeFiles/spotify-cli.dir/audio_cache.cpp.s
+
 CMakeFiles/spotify-cli.dir/spotify_api.cpp.o: CMakeFiles/spotify-cli.dir/flags.make
 CMakeFiles/spotify-cli.dir/spotify_api.cpp.o: /home/monolith/Desktop/spotify-cli/spotify_api.cpp
 CMakeFiles/spotify-cli.dir/spotify_api.cpp.o: CMakeFiles/spotify-cli.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/monolith/Desktop/spotify-cli/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/spotify-cli.dir/spotify_api.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/monolith/Desktop/spotify-cli/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/spotify-cli.dir/spotify_api.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/spotify-cli.dir/spotify_api.cpp.o -MF CMakeFiles/spotify-cli.dir/spotify_api.cpp.o.d -o CMakeFiles/spotify-cli.dir/spotify_api.cpp.o -c /home/monolith/Desktop/spotify-cli/spotify_api.cpp
 
 CMakeFiles/spotify-cli.dir/spotify_api.cpp.i: cmake_force
@@ -103,7 +117,7 @@ CMakeFiles/spotify-cli.dir/spotify_api.cpp.s: cmake_force
 CMakeFiles/spotify-cli.dir/login.cpp.o: CMakeFiles/spotify-cli.dir/flags.make
 CMakeFiles/spotify-cli.dir/login.cpp.o: /home/monolith/Desktop/spotify-cli/login.cpp
 CMakeFiles/spotify-cli.dir/login.cpp.o: CMakeFiles/spotify-cli.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/monolith/Desktop/spotify-cli/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/spotify-cli.dir/login.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/monolith/Desktop/spotify-cli/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/spotify-cli.dir/login.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/spotify-cli.dir/login.cpp.o -MF CMakeFiles/spotify-cli.dir/login.cpp.o.d -o CMakeFiles/spotify-cli.dir/login.cpp.o -c /home/monolith/Desktop/spotify-cli/login.cpp
 
 CMakeFiles/spotify-cli.dir/login.cpp.i: cmake_force
@@ -117,7 +131,7 @@ CMakeFiles/spotify-cli.dir/login.cpp.s: cmake_force
 CMakeFiles/spotify-cli.dir/token.cpp.o: CMakeFiles/spotify-cli.dir/flags.make
 CMakeFiles/spotify-cli.dir/token.cpp.o: /home/monolith/Desktop/spotify-cli/token.cpp
 CMakeFiles/spotify-cli.dir/token.cpp.o: CMakeFiles/spotify-cli.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/monolith/Desktop/spotify-cli/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/spotify-cli.dir/token.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/monolith/Desktop/spotify-cli/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/spotify-cli.dir/token.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/spotify-cli.dir/token.cpp.o -MF CMakeFiles/spotify-cli.dir/token.cpp.o.d -o CMakeFiles/spotify-cli.dir/token.cpp.o -c /home/monolith/Desktop/spotify-cli/token.cpp
 
 CMakeFiles/spotify-cli.dir/token.cpp.i: cmake_force
@@ -131,7 +145,7 @@ CMakeFiles/spotify-cli.dir/token.cpp.s: cmake_force
 CMakeFiles/spotify-cli.dir/base64.cpp.o: CMakeFiles/spotify-cli.dir/flags.make
 CMakeFiles/spotify-cli.dir/base64.cpp.o: /home/monolith/Desktop/spotify-cli/base64.cpp
 CMakeFiles/spotify-cli.dir/base64.cpp.o: CMakeFiles/spotify-cli.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/monolith/Desktop/spotify-cli/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/spotify-cli.dir/base64.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/monolith/Desktop/spotify-cli/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/spotify-cli.dir/base64.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/spotify-cli.dir/base64.cpp.o -MF CMakeFiles/spotify-cli.dir/base64.cpp.o.d -o CMakeFiles/spotify-cli.dir/base64.cpp.o -c /home/monolith/Desktop/spotify-cli/base64.cpp
 
 CMakeFiles/spotify-cli.dir/base64.cpp.i: cmake_force
@@ -145,6 +159,7 @@ CMakeFiles/spotify-cli.dir/base64.cpp.s: cmake_force
 # Object files for target spotify-cli
 spotify__cli_OBJECTS = \
 "CMakeFiles/spotify-cli.dir/main.cpp.o" \
+"CMakeFiles/spotify-cli.dir/audio_cache.cpp.o" \
 "CMakeFiles/spotify-cli.dir/spotify_api.cpp.o" \
 "CMakeFiles/spotify-cli.dir/login.cpp.o" \
 "CMakeFiles/spotify-cli.dir/token.cpp.o" \
@@ -154,6 +169,7 @@ spotify__cli_OBJECTS = \
 spotify__cli_EXTERNAL_OBJECTS =
 
 spotify-cli: CMakeFiles/spotify-cli.dir/main.cpp.o
+spotify-cli: CMakeFiles/spotify-cli.dir/audio_cache.cpp.o
 spotify-cli: CMakeFiles/spotify-cli.dir/spotify_api.cpp.o
 spotify-cli: CMakeFiles/spotify-cli.dir/login.cpp.o
 spotify-cli: CMakeFiles/spotify-cli.dir/token.cpp.o
@@ -166,7 +182,7 @@ spotify-cli: /home/monolith/vcpkg/installed/x64-linux/lib/libz.a
 spotify-cli: /home/monolith/vcpkg/installed/x64-linux/debug/lib/libssl.a
 spotify-cli: /home/monolith/vcpkg/installed/x64-linux/debug/lib/libcrypto.a
 spotify-cli: CMakeFiles/spotify-cli.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/monolith/Desktop/spotify-cli/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable spotify-cli"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/monolith/Desktop/spotify-cli/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable spotify-cli"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/spotify-cli.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

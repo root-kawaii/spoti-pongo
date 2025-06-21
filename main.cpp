@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "audio_cache.h"
 #include <nlohmann/json.hpp>
 #include "spotify_api.h"
 #include "login.h"
@@ -52,6 +53,35 @@ int main() {
     std::string clientSecret = "ea1e9c60354a44178a6677108cb25640";
     // std::string accessToken = "BQAVrhA5scIKjVCmnEfjBN6TCiEkJlYgDuSjL1mGD37f7TCi73EPM8LWzWogoor6sMPQdDrAg0xQ_ZYgWwBtIWHS7iDjEV7_0D7DCQhuKWpE7bLs48mOybGEnA_1vwrSRfn-UkSSGT9Bwg_FkMtbLSLVG5Do8M3llL9dFYCStr02eSvKAATxBcMYnkHnEy0r14Kjf5LlOtSKYOwj12DyzblXMs1KbUgBHsj5dR3o3I-f5Kk";
     Tokens tokens;
+
+    AudioCache cache("librespot_cache.pcm");
+
+    std::atomic<bool> stop_reader{false};
+
+    auto start_stdin_reader = [&cache, &stop_reader]() {
+        std::thread stdin_reader([&cache, &stop_reader]() {
+            std::vector<uint8_t> buffer(14096);
+            std::cout << "\nReader started\n";
+
+            // Loop ends when either:
+            //  1. stop_reader == true, OR
+            //  2. std::cin hits EOF / error
+            while (!stop_reader && std::cin.read(reinterpret_cast<char*>(buffer.data()),
+                                                buffer.size())) {
+
+                size_t n = std::cin.gcount();
+                if (n == 0) continue;
+                buffer.resize(n);
+                cache.push_data(buffer);
+            }
+
+            std::cout << "\nReader exiting\n";
+        });
+
+        stdin_reader.detach();      // still detached, but now cooperatively stoppable
+    };
+
+
 
     loadTokens(tokens, "tokens.json");
     turnOnDevice("Coglionazzo");
@@ -110,6 +140,11 @@ int main() {
                 continue;
             }
             extractUri(*result, tracks, api);
+            start_stdin_reader();
+            for (const Track& i : tracks) {
+                api.playSpotifyTrack(i.song_uri);
+            }
+            stop_reader = true;
 
         } else if (command == "play") {
             if (argument.empty()) {
@@ -120,9 +155,11 @@ int main() {
             Track selectedTrack = tracks[std::stoi(argument)];
 
             std::cout << "Playing track -- " << selectedTrack.song_name << " -- " << selectedTrack.artist << "\n";
-            downloadImage(selectedTrack.cover, "buffer.txt");
-            printImageGeneric("buffer.txt");
+            // Later in your code, when you're ready to start reading:
+            // downloadImage(selectedTrack.cover, "buffer.txt");
+            // printImageGeneric("buffer.txt");
             api.playSpotifyTrack(selectedTrack.song_uri);  // Pass argument as URI
+            // stop_reader = true;
 
         } else {
             std::cout << "Unknown command: " << command << "\n";
@@ -140,7 +177,6 @@ void extractUri(const nlohmann::json& result, std::vector<Track>& tracks, Spotif
 
         int termWidth = getTerminalWidth();
         int imageStartCol = 4 * termWidth / 3; // Keep some spacing
-
 
         for (int i = 0; i < limit; ++i) {
             Track new_track;
@@ -179,9 +215,7 @@ void extractUri(const nlohmann::json& result, std::vector<Track>& tracks, Spotif
 
             downloadImage(new_track.cover, "buffer.txt");
 
-            std::thread([&api, uri]() {
-                preCacheTrack(uri, api);
-            }).detach();
+
 
             // Save cursor position
             std::cout << "\033[s"; // Save cursor position
@@ -210,9 +244,13 @@ void extractUri(const nlohmann::json& result, std::vector<Track>& tracks, Spotif
 
 
 void turnOnDevice(std::string deviceName){
-std::string command = "librespot --disable-audio-cache --cache " + std::string(getenv("HOME")) + 
+std::string command = "librespot --cache " + std::string(getenv("HOME")) + 
                       "/.cache/librespot --name " + deviceName + 
                       " --backend pipe | ffplay -f s16le -ar 88200 -nodisp - > /dev/null 2>&1 &";
+system(command.c_str());
+command = "librespot --cache " + std::string(getenv("HOME")) + 
+                      "/.cache/librespot --name " + deviceName + "-cache" + 
+                      " --backend pipe > /tmp/spotify_cache.raw &";
 system(command.c_str());
 
 
@@ -329,3 +367,5 @@ void preCacheTrack(const std::string& uri, SpotifyAPI& api) {
     api.pausePlayback();  // You must implement this in SpotifyAPI
     std::cout << "Pre-cached successfully.\n";
 }
+
+

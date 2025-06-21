@@ -80,6 +80,7 @@
         "typeinfo": "cpp",
         "variant": "cpp",
         "regex": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "stdfloat": "cpp"
     }
 }

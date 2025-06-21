@@ -9,6 +9,7 @@ find_package(nlohmann_json REQUIRED)
 # Add executable with source files
 add_executable(spotify-cli
     main.cpp
+    audio_cache.cpp
     spotify_api.cpp
     login.cpp
     token.cpp

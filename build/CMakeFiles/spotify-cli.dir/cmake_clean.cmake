@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/spotify-cli.dir/link.d"
+  "CMakeFiles/spotify-cli.dir/audio_cache.cpp.o"
+  "CMakeFiles/spotify-cli.dir/audio_cache.cpp.o.d"
   "CMakeFiles/spotify-cli.dir/base64.cpp.o"
   "CMakeFiles/spotify-cli.dir/base64.cpp.o.d"
   "CMakeFiles/spotify-cli.dir/login.cpp.o"

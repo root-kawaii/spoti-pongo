@@ -129,6 +129,30 @@ spotify-cli/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/spotify-cli.dir/build.make CMakeFiles/spotify-cli.dir/build
 .PHONY : spotify-cli/fast
 
+audio_cache.o: audio_cache.cpp.o
+.PHONY : audio_cache.o
+
+# target to build an object file
+audio_cache.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spotify-cli.dir/build.make CMakeFiles/spotify-cli.dir/audio_cache.cpp.o
+.PHONY : audio_cache.cpp.o
+
+audio_cache.i: audio_cache.cpp.i
+.PHONY : audio_cache.i
+
+# target to preprocess a source file
+audio_cache.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spotify-cli.dir/build.make CMakeFiles/spotify-cli.dir/audio_cache.cpp.i
+.PHONY : audio_cache.cpp.i
+
+audio_cache.s: audio_cache.cpp.s
+.PHONY : audio_cache.s
+
+# target to generate assembly for a file
+audio_cache.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spotify-cli.dir/build.make CMakeFiles/spotify-cli.dir/audio_cache.cpp.s
+.PHONY : audio_cache.cpp.s
+
 base64.o: base64.cpp.o
 .PHONY : base64.o
 
@@ -258,6 +282,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... spotify-cli"
+	@echo "... audio_cache.o"
+	@echo "... audio_cache.i"
+	@echo "... audio_cache.s"
 	@echo "... base64.o"
 	@echo "... base64.i"
 	@echo "... base64.s"
